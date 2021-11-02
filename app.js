@@ -12,6 +12,7 @@ const blogRouter = require('./controllers/blog-control')
 app.use('/public', express.static('public'))
 app.use(express.urlencoded({extended: false}))
 app.use('/', blogRouter)
+app.set('view engine', 'ejs')
 
 
 
