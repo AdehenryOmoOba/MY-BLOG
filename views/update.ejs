@@ -1,0 +1,15 @@
+<%- include("./partials/header.ejs") %>
+<%- include("./partials/navBar.ejs") %> 
+
+<div class="container mt-5">
+    <h3 class="my-3">Compose Your Blog Here... :)</h3>
+   <form action="/update/<%= update._id  %> " method="post">
+      <input type="text" name="title" value="<%= update.title %> " class="form-control" required>
+      <textarea name="content" cols="30" rows="10" class="form-control mt-3" required><%= update.content %></textarea>
+      <input type="submit" value="Save Changes" class="btn btn-lg btn-danger mt-5">
+
+   </form>
+</div>
+
+
+<%- include("./partials/footer.ejs") %>

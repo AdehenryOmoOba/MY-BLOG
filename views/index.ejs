@@ -17,6 +17,8 @@
               <h5 class="card-title"><%= blog.title %></h5>
               <p class="card-text"><%= blog.content.slice(0, 199) %>...<a href="/blog/<%= blog._id %>">Read more<a></p>
               <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read more...</a>
+              <a href="/delete/<%= blog._id %>" class="btn btn-danger">Dele</a>
+              <a href="/update/<%= blog._id %>" class="btn btn-warning">Edit</a>
             </div>
           </div>
     <%    })  %>  
@@ -26,8 +28,6 @@
 
   </div>
   
-
-
 
 <%- include("./partials/footer.ejs") %> 
 

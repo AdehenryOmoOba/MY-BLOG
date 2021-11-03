@@ -4,6 +4,7 @@ const BlogModel = require('../models/blog-model')
 
 
 // Routes
+// Read all blogs
 router.get('/', async (req, res) => {
      
     const allBlogs = await BlogModel.find({});
@@ -11,10 +12,12 @@ router.get('/', async (req, res) => {
     res.render('index', {blogs: allBlogs})
 })
 
+// Compose New blog
 router.get('/compose', (req, res) => {
     res.render('composeBlog')
 })
 
+// Create New blog
 router.post('/compose', async (req, res) => {
     const {title, content} = req.body;
     console.log(title | content);
@@ -43,6 +46,7 @@ router.post('/compose', async (req, res) => {
   
 })
 
+// view a single blog
 router.get('/blog/:id', async (req, res) => {
   const {id} = req.params;
   
@@ -51,6 +55,37 @@ router.get('/blog/:id', async (req, res) => {
   res.render('oneBlog', {oneBlog: blog})
 
 })
+
+// Delete a blog
+router.get('/delete/:id', async (req, res) => {
+    const {id} = req.params;
+
+    await BlogModel.deleteOne({_id: id});
+
+    console.log('Blog deleted successfully')
+
+    res.redirect('/')
+})
+
+// Edit a blog
+router.get('/update/:id', async (req, res) => {
+    const {id} = req.params;
+   
+    const updateBlog = await BlogModel.findOne({_id: id})
+
+    res.render('update', {update: updateBlog})
+})
+
+// Update changes to a blog
+router.post('/update/:id', async (req, res) => {
+    const {id} = req.params;
+    const {title, content} = req.body;
+   
+    await BlogModel.updateOne({_id: id}, {title, content})
+
+    res.redirect('/')
+})
+
 
 
 module.exports = router;
