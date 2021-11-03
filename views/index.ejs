@@ -3,18 +3,22 @@
 <%- include("./partials/navBar.ejs") %> 
 
 
-  <div class="container">
+  <div class="container py-5">
 
       <div class="body mt-3">
         <h1>Fresh Blogs </h1>
-
-        <div class="card mt-3">
-          <div class="card-body">
-            <h5 class="card-title">Blog title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Read more...</a>
+    <%    blogs.forEach((blog) => {   %>  
+          <div class="card mt-3">
+            <div class="card-body">
+              <p class="text-muted">Time Published: <%= blog.postedAt %></p>
+              <h5 class="card-title"><%= blog.title %></h5>
+              <p class="card-text"><%= blog.content.slice(0, 199) %>...<a href="#">Read more<a></p>
+              <a href="#" class="btn btn-primary">Read more...</a>
+            </div>
           </div>
-        </div>
+    <%    })  %>  
+
+        
       </div>
 
   </div>

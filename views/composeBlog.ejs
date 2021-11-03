@@ -1,7 +1,15 @@
 <%- include("./partials/header.ejs") %>
 <%- include("./partials/navBar.ejs") %> 
 
+<div class="container mt-5">
+    <h3 class="my-3">Compose Your Blog Here... :)</h3>
+   <form action="/compose" method="post">
+      <input type="text" name="title" placeholder="Enter Title" class="form-control" required>
+      <textarea name="content" cols="30" rows="10" class="form-control mt-3" placeholder="Enter Content Here..." required></textarea>
+      <input type="submit" value="Post" class="btn btn-lg btn-danger mt-5">
 
+   </form>
+</div>
 
 
 <%- include("./partials/footer.ejs") %>
