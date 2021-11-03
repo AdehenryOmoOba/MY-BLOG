@@ -1,0 +1,18 @@
+<%- include("./partials/header.ejs") %> 
+<%- include("./partials/navBar.ejs") %> 
+
+<div class="container mt-5">
+    <div class="card mt-3">
+        <div class="card-body">
+          <p class="text-muted">Time Published: <%= oneBlog.postedAt %></p>
+          <h5 class="card-title"><%= oneBlog.title %></h5>
+          <p class="card-text"><%= oneBlog.content %></p>
+        </div>
+      </div>
+</div>
+
+
+
+
+
+<%- include("./partials/footer.ejs") %> 

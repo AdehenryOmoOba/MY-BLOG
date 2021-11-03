@@ -12,9 +12,6 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/compose', (req, res) => {
-
-    
-
     res.render('composeBlog')
 })
 
@@ -27,7 +24,7 @@ router.post('/compose', async (req, res) => {
             res.send('Please provide Title and/or Content...')
         }
 
-        const newBlog = new BlogModel({title, content})
+        const newBlog =  new BlogModel({title, content})
 
         newBlog.save();
 
@@ -44,6 +41,15 @@ router.post('/compose', async (req, res) => {
 
 
   
+})
+
+router.get('/blog/:id', async (req, res) => {
+  const {id} = req.params;
+  
+  const blog = await BlogModel.findOne({_id: id});
+
+  res.render('oneBlog', {oneBlog: blog})
+
 })
 
 
