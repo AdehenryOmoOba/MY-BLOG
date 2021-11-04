@@ -7,7 +7,10 @@
           <p class="text-muted">Time Published: <%= oneBlog.postedAt %></p>
           <h5 class="card-title"><%= oneBlog.title %></h5>
           <p class="card-text"><%= oneBlog.content %></p>
-        </div> 
+          <a href="/delete/<%= oneBlog._id %>" class="btn btn-danger">Delete</a>
+          <a href="/update/<%= oneBlog._id %>" class="btn btn-warning">Edit</a>
+        </div>
+        
       </div>
 </div>
 

@@ -5,12 +5,13 @@ if (process.env.NODE_ENV !== 'production') {
 require('./db')
 const express = require('express');
 const app = express();
-const blogRouter = require('./controllers/blog-control')
+const blogRouter = require('./controllers/blog-control');
+
 
 
 // Middlewares
 app.use('/public', express.static('public'))
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 app.use('/', blogRouter)
 app.set('view engine', 'ejs')
 

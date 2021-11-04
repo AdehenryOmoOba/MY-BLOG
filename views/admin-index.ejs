@@ -1,6 +1,6 @@
 <%- include("./partials/header.ejs") %> 
 
-<%- include("./partials/navBar.ejs") %> 
+<%- include("./partials/new-blog-nav.ejs") %> 
 
 
   <div class="container py-5">
@@ -17,6 +17,8 @@
               <h5 class="card-title"><%= blog.title %></h5>
               <p class="card-text"><%= blog.content.slice(0, 199) %>...<a href="/blog/<%= blog._id %>">Read more<a></p>
               <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read more...</a>
+              <a href="/delete/<%= blog._id %>" class="btn btn-danger">Delete</a>
+              <a href="/update/<%= blog._id %>" class="btn btn-warning">Edit</a>
             </div>
           </div>
     <%    })  %>  

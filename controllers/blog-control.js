@@ -1,9 +1,62 @@
 const express = require('express');
 const router = express.Router()
 const BlogModel = require('../models/blog-model')
+const AdminModel = require('../models/admin-model')
+const bcrypt = require('bcrypt');
+
 
 
 // Routes
+
+// Admin Login
+router.get('/admin', (req, res) => {
+     
+    res.render('admin')
+})
+
+router.post('/admin', (req, res) => {
+     
+    res.render('admin')
+})
+
+router.get('/admin/sign-up', (req, res) => {
+     
+    res.render('admin-register')
+})
+
+// New Admin Sign Up
+router.post('/admin/sign-up', async (req, res) => {
+    const {username, email, password} = req.body;
+
+
+     try {
+
+         if (!email || !username || !password){
+          return   res.send(`<h2>Sign Up fail!...One of Email, Username or Password is missing.</h2>`)
+         }
+
+         const hashedPassword = await bcrypt.hash(password, 10)
+
+         const newAdmin = new AdminModel();
+
+         newAdmin.username = username;
+         newAdmin.email = email;
+         newAdmin.password = hashedPassword;
+
+         console.log(username , email , hashedPassword)
+
+         newAdmin.save();
+
+         res.redirect('/admin')
+
+     } catch (error) {
+         console.log(error)
+         res.redirect('/admin/sign-up')
+     }
+
+})
+
+
 // Read all blogs
 router.get('/', async (req, res) => {
      
