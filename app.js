@@ -50,6 +50,24 @@ passport.use(new LocalStrategy( function (username, password, done) {
 
 // Routes
 
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()){
+        return next()
+    } else {
+        res.redirect('/')
+    }
+}
+
+function isLoggedOut(req, res, next) {
+  if (!req.isAuthenticated()){
+      return next()
+  } else {
+      res.redirect('/admin')
+  }
+}
+
+
 // Get Admin Login Page
 app.get('/admin', (req, res) => {    
      
@@ -61,14 +79,14 @@ app.get('/admin', (req, res) => {
 app.post('/admin', passport.authenticate('local', {successRedirect: '/admin-index', failureRedirect: "/admin"}))
 
 // Admin Index page
-app.get('/admin-index', async (req, res) => {    
+app.get('/admin-index', isLoggedIn , async (req, res) => {    
      
     const allBlogs = await BlogModel.find({});
 
     res.render('admin-index', {blogs: allBlogs})
 })
 
-app.get('/admin-oneblog/:id', async (req, res) => {
+app.get('/admin-oneblog/:id', isLoggedIn , async (req, res) => {
 
     const {id} = req.params;
      
@@ -78,13 +96,21 @@ app.get('/admin-oneblog/:id', async (req, res) => {
 })
 
 // Get Admin Sign Up page
-app.get('/admin/sign-up', (req, res) => {
+app.get('/admin/sign-up', isLoggedIn , (req, res) => {
      
     res.render('admin-register')
 })
 
+//Admin Sign Out
+app.get('/sign-out', (req, res) => {
+      req.logOut();
+      res.redirect('/admin')
+})
+
+
+
 // Admin Sign Up
-app.post('/admin/sign-up', async (req, res) => {
+app.post('/admin/sign-up' , async (req, res) => {
     const {username, email, password} = req.body;
 
 
@@ -125,12 +151,12 @@ app.get('/', async (req, res) => {
 })
 
 // Compose New blog
-app.get('/compose', (req, res) => {
+app.get('/compose' , isLoggedIn, (req, res) => {
     res.render('composeBlog')
 })
 
-// Create New blog
-app.post('/compose', async (req, res) => {
+// Add New blog
+app.post('/compose', isLoggedIn , async (req, res) => {
     const {title, content} = req.body;
     console.log(title | content);
 
@@ -169,7 +195,7 @@ app.get('/blog/:id', async (req, res) => {
 })
 
 // Delete a blog
-app.get('/delete/:id', async (req, res) => {
+app.get('/delete/:id', isLoggedIn , async (req, res) => {
     const {id} = req.params;
 
     await BlogModel.deleteOne({_id: id});
@@ -180,7 +206,7 @@ app.get('/delete/:id', async (req, res) => {
 })
 
 // Edit a blog
-app.get('/update/:id', async (req, res) => {
+app.get('/update/:id', isLoggedIn , async (req, res) => {
     const {id} = req.params;
    
     const updateBlog = await BlogModel.findOne({_id: id})
@@ -189,7 +215,7 @@ app.get('/update/:id', async (req, res) => {
 })
 
 // Update changes to a blog
-app.post('/update/:id', async (req, res) => {
+app.post('/update/:id', isLoggedIn , async (req, res) => {
     const {id} = req.params;
     const {title, content} = req.body;
    

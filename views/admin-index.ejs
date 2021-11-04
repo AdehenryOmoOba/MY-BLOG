@@ -17,7 +17,7 @@
               <h5 class="card-title"><%= blog.title %></h5>
               <p class="card-text"><%= blog.content.slice(0, 199) %>...<a href="/admin-oneblog/<%= blog._id %>">Read more<a></p>
               <a href="/admin-oneblog/<%= blog._id %>" class="btn btn-primary">Read more...</a>
-              <a href="/delete/<%= blog._id %>" class="btn btn-danger">Delete</a>
+              <a href="/delete/<%= blog._id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this blog?')">Delete</a>
               <a href="/update/<%= blog._id %>" class="btn btn-warning">Edit</a>
             </div>
           </div>
