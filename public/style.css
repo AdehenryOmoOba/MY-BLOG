@@ -1,6 +1,13 @@
-/* *{
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-size: 10px;
-} */
+
+
+
+@media only screen and (max-width: 993px) {
+  
+   #admin-login{
+      display: grid;
+      place-content: center;
+      }
+   #admin-login-form{
+      min-width: 300px;
+      }
+}
